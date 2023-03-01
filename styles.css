@@ -1,0 +1,37 @@
+:root {
+  --main-bg-color: rgba(241, 189, 124, 0.664);
+  --shadow-color: rgb(177, 147, 102);
+}
+body {
+  margin: 0;
+  background-color: blanchedalmond;
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 5% 1fr 5%;
+}
+
+header {
+  background-color: var(--main-bg-color);
+  padding: 20px;
+  box-shadow: 0px 0px 20px var(--shadow-color);
+  color: rgba(151, 21, 21, 0.959);
+  font-size: 18px;
+  font-weight: 700;
+}
+.card-space {
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  height: fit-content;
+  gap: 20px;
+  padding: 0px 10px;
+}
+.card {
+  background-color: white;
+  padding: 10px 20px;
+}
+
+footer {
+  background-color: var(--main-bg-color);
+  box-shadow: 0px -0px 20px var(--shadow-color);
+}
