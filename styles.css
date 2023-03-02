@@ -54,6 +54,14 @@ header {
   bottom: 120px;
 }
 
+.add-book:hover {
+  border: var(--sec-text-color) 2px groove ;
+}
+
+.add-book:active {
+  opacity: 0.8;
+}
+
 footer {
   background-color: var(--main-bg-color);
   box-shadow: 0px -0px 20px var(--shadow-color);
