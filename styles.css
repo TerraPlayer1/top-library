@@ -52,14 +52,15 @@ header {
   position: absolute;
   right: 60px;
   bottom: 120px;
+  opacity: 0.8;
 }
 
 .add-book:hover {
-  border: var(--sec-text-color) 2px groove ;
+  opacity: 1;
 }
 
 .add-book:active {
-  opacity: 0.8;
+  border: var(--sec-text-color) 2px solid ;
 }
 
 footer {
