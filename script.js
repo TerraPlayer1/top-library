@@ -1,4 +1,7 @@
 const addBookBtn = document.querySelector(".add-book");
+const modal = document.querySelector(".modal");
+const modalContent = document.getElementsByClassName("modal-content");
+const span = document.getElementsByClassName("close")[0];
 
 const myLibrary = [];
 
@@ -21,16 +24,21 @@ function addBookToLibrary(book) {
 }
 
 addBookBtn.onclick = function () {
-  GFG_Fun();
+  modal.style.display = "block";
+  createForm();
 };
+
 // To be used to increment myLibrary[i] for debugging purposes
 // let i = 0;
 
 // Create a break line element
 const br = document.createElement("br");
-function GFG_Fun() {
+
+// Create a form
+function createForm() {
   // Create a form dynamically
   const form = document.createElement("form");
+  form.setAttribute("class", "bookForm");
   form.setAttribute("method", "post");
   form.setAttribute("action", "submit.php");
 
@@ -52,7 +60,7 @@ function GFG_Fun() {
   pages.setAttribute("name", "pages");
   pages.setAttribute("placeholder", "Page Number");
 
-  // Create an input element for Read or not
+  // Create an input element for Read
   const statusRead = document.createElement("input");
   statusRead.setAttribute("type", "radio");
   statusRead.setAttribute("name", "status");
@@ -62,7 +70,7 @@ function GFG_Fun() {
   readLabel.setAttribute("for", "read");
   readLabel.innerText = "read";
 
-  // Create an input element for retype-password
+  // Create an input element for Not Read
   const statusNotRead = document.createElement("input");
   statusNotRead.setAttribute("type", "radio");
   statusNotRead.setAttribute("name", "status");
@@ -72,10 +80,23 @@ function GFG_Fun() {
   notReadLabel.setAttribute("for", "not read");
   notReadLabel.innerText = "not read";
 
-  // create a submit button
+  // Create a submit button
   const s = document.createElement("input");
   s.setAttribute("type", "submit");
   s.setAttribute("value", "Submit");
+
+  // Hide modal and remove form
+  span.onclick = function () {
+    modal.style.display = "none";
+    form.remove(); // This prevents multiple form elements showing
+  };
+  // Hide modal and remove form
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      form.remove(); // This prevents multiple form elements showing
+    }
+  };
 
   // Append the full name input to the form
   form.appendChild(title);
@@ -104,9 +125,8 @@ function GFG_Fun() {
   // Append the submit button to the form
   form.appendChild(s);
 
-  document.getElementsByTagName("body")[0].appendChild(form);
+  modalContent[0].appendChild(form);
 
-  
   form.addEventListener("submit", (event) => {
     // stop form submission
     event.preventDefault();
@@ -116,20 +136,19 @@ function GFG_Fun() {
       pages.value,
       form.status.value
     );
-    
-    addBookToLibrary(book);
-    
-  //   console.log(myLibrary[i].info());
-  //   console.log(Object.keys(myLibrary));
-  //   for (const key in myLibrary) {
-  //   const value = myLibrary[key];
 
-  //   console.log(key + ' : ' + value.info());
-    
-  // }
-  //   i+=1
-  //   console.log(i)
-    form.remove()
-    
+    addBookToLibrary(book);
+
+    //   console.log(myLibrary[i].info());
+    //   console.log(Object.keys(myLibrary));
+    //   for (const key in myLibrary) {
+    //   const value = myLibrary[key];
+
+    //   console.log(key + ' : ' + value.info());
+
+    // }
+    //   i+=1
+    //   console.log(i)
+    form.remove();
   });
 }
