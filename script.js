@@ -2,6 +2,7 @@ const addBookBtn = document.querySelector(".add-book");
 const modal = document.querySelector(".modal");
 const modalContent = document.getElementsByClassName("modal-content");
 const span = document.getElementsByClassName("close")[0];
+const cardSpace = document.getElementsByClassName("card-space")[0];
 
 const myLibrary = [];
 
@@ -28,9 +29,41 @@ addBookBtn.onclick = function () {
   createForm();
 };
 
-// To be used to increment myLibrary[i] for debugging purposes
-// let i = 0;
+function createCard(data) {
+  const card = document.createElement("div");
+  card.setAttribute("class", "card");
 
+  const title = document.createElement("h2");
+
+  const author = document.createElement("h3");
+
+  const info = document.createElement("div");
+  info.setAttribute("class", "page-status-container")
+
+  const pages = document.createElement("p");
+
+  const status = document.createElement("p");
+
+  const changeStatus = document.createElement("button");
+  changeStatus.textContent = "R"
+
+  const remove = document.createElement("button");
+  remove.textContent = "Del"
+
+  cardSpace.appendChild(card)
+  card.appendChild(title);
+  card.appendChild(author);
+  card.appendChild(info);
+  info.appendChild(pages);
+  info.appendChild(status);
+  info.appendChild(changeStatus);
+  card.appendChild(remove);
+
+  title.textContent = data.title
+  author.textContent = data.author
+  pages.textContent = data.pages
+  status.textContent = data.read
+}
 // Create a break line element
 const br = document.createElement("br");
 
@@ -138,6 +171,8 @@ function createForm() {
     );
 
     addBookToLibrary(book);
+
+    createCard(book);
 
     form.remove();
     modal.style.display = "none";
