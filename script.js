@@ -139,16 +139,7 @@ function createForm() {
 
     addBookToLibrary(book);
 
-    //   console.log(myLibrary[i].info());
-    //   console.log(Object.keys(myLibrary));
-    //   for (const key in myLibrary) {
-    //   const value = myLibrary[key];
-
-    //   console.log(key + ' : ' + value.info());
-
-    // }
-    //   i+=1
-    //   console.log(i)
     form.remove();
+    modal.style.display = "none";
   });
 }
