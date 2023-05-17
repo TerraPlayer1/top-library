@@ -33,6 +33,9 @@ header {
   background-color: var(--main-bg-color);
   padding: 10px 20px;
   display: grid;
+  width: 12rem;
+  height: 14rem;
+  text-align: center;
 }
 
 .page-status-container {

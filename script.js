@@ -3,6 +3,7 @@ const modal = document.querySelector(".modal");
 const modalContent = document.getElementsByClassName("modal-content");
 const span = document.getElementsByClassName("close")[0];
 const cardSpace = document.getElementsByClassName("card-space")[0];
+const cardClass = document.getElementsByClassName("card");
 
 const myLibrary = [];
 
@@ -16,10 +17,11 @@ function Book(title, author, pages, read) {
   };
 }
 
-const test = new Book("bob", "al jaque", "22", true);
+// const test = new Book("bob", "al jaque", "22", true);
+// myLibrary.push(test)
 
-const test2 = new Book("Big", "Son Bonbbon", "2000", false);
-
+// const test2 = new Book("Big", "Son Bonbbon", "2000", false);
+// myLibrary.push(test2)
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -29,7 +31,12 @@ addBookBtn.onclick = function () {
   createForm();
 };
 
-function createCard(data) {
+function createCard() {
+for (const book in myLibrary){
+  if (myLibrary[book].title === cardClass.title){
+    break
+  }
+  // alert(cardClass.h2)// Alert h2 of all cards
   const card = document.createElement("div");
   card.setAttribute("class", "card");
 
@@ -59,41 +66,37 @@ function createCard(data) {
   info.appendChild(changeStatus);
   card.appendChild(remove);
 
-  title.textContent = data.title
-  author.textContent = data.author
-  pages.textContent = data.pages
-  status.textContent = data.read
+  title.textContent = myLibrary[book].title
+  // alert(myLibrary[book].title)
+  author.textContent = myLibrary[book].author
+  pages.textContent = myLibrary[book].pages
+  status.textContent = myLibrary[book].read
 }
-// Create a break line element
+}
 const br = document.createElement("br");
 
-// Create a form
 function createForm() {
-  // Create a form dynamically
+
   const form = document.createElement("form");
   form.setAttribute("class", "bookForm");
   form.setAttribute("method", "post");
   form.setAttribute("action", "submit.php");
 
-  // Create an input element for Book Title
   const title = document.createElement("input");
   title.setAttribute("type", "text");
   title.setAttribute("name", "title");
   title.setAttribute("placeholder", "Book Title");
 
-  // Create an input element for Author
   const author = document.createElement("input");
   author.setAttribute("type", "text");
   author.setAttribute("name", "author");
   author.setAttribute("placeholder", "Author");
 
-  // Create an input element for Page Number
   const pages = document.createElement("input");
   pages.setAttribute("type", "number");
   pages.setAttribute("name", "pages");
   pages.setAttribute("placeholder", "Page Number");
 
-  // Create an input element for Read
   const statusRead = document.createElement("input");
   statusRead.setAttribute("type", "radio");
   statusRead.setAttribute("name", "status");
@@ -103,7 +106,6 @@ function createForm() {
   readLabel.setAttribute("for", "read");
   readLabel.innerText = "read";
 
-  // Create an input element for Not Read
   const statusNotRead = document.createElement("input");
   statusNotRead.setAttribute("type", "radio");
   statusNotRead.setAttribute("name", "status");
@@ -113,7 +115,6 @@ function createForm() {
   notReadLabel.setAttribute("for", "not read");
   notReadLabel.innerText = "not read";
 
-  // Create a submit button
   const s = document.createElement("input");
   s.setAttribute("type", "submit");
   s.setAttribute("value", "Submit");
@@ -131,38 +132,31 @@ function createForm() {
     }
   };
 
-  // Append the full name input to the form
   form.appendChild(title);
 
-  // Inserting a line break
   form.appendChild(br.cloneNode());
 
-  // Append the author to the form
   form.appendChild(author);
   form.appendChild(br.cloneNode());
 
-  // Append the emailID to the form
   form.appendChild(pages);
   form.appendChild(br.cloneNode());
 
-  // Append the Password to the form
   form.appendChild(statusRead);
   form.appendChild(readLabel);
   form.appendChild(br.cloneNode());
 
-  // Append the ReEnterPassword to the form
   form.appendChild(statusNotRead);
   form.appendChild(notReadLabel);
   form.appendChild(br.cloneNode());
 
-  // Append the submit button to the form
   form.appendChild(s);
 
   modalContent[0].appendChild(form);
 
   form.addEventListener("submit", (event) => {
-    // stop form submission
     event.preventDefault();
+    
     const book = new Book(
       title.value,
       author.value,
@@ -172,9 +166,12 @@ function createForm() {
 
     addBookToLibrary(book);
 
-    createCard(book);
+    createCard();
 
     form.remove();
     modal.style.display = "none";
   });
 }
+
+
+// TODO: Add functionaliy to status and delete buttons
