@@ -3,7 +3,6 @@ const modal = document.querySelector(".modal");
 const modalContent = document.getElementsByClassName("modal-content");
 const span = document.getElementsByClassName("close")[0];
 const cardSpace = document.getElementsByClassName("card-space")[0];
-const cardClass = document.getElementsByClassName("card");
 
 const myLibrary = [];
 
@@ -32,11 +31,8 @@ addBookBtn.onclick = function () {
   createForm();
 };
 
-function createCard() {
-for (const book in myLibrary){
-  if (myLibrary[book].title === cardClass.title){
-    break
-  }
+function createCard() { // No need to reiterate/ just look at -1 in the array
+  const getBook = myLibrary.length - 1
   // alert(cardClass.h2)// Alert h2 of all cards
   const card = document.createElement("div");
   card.setAttribute("class", "card");
@@ -66,14 +62,13 @@ for (const book in myLibrary){
   info.appendChild(status);
   info.appendChild(changeStatus);
   card.appendChild(remove);
-
-  title.textContent = myLibrary[book].title
+  title.textContent = myLibrary[getBook].title
   // alert(myLibrary[book].title)
-  author.textContent = myLibrary[book].author
-  pages.textContent = myLibrary[book].pages
-  status.textContent = myLibrary[book].read
+  author.textContent = myLibrary[getBook].author
+  pages.textContent = myLibrary[getBook].pages
+  status.textContent = myLibrary[getBook].read
 }
-}
+
 const br = document.createElement("br");
 
 function createForm() {
