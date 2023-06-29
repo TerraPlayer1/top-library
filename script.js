@@ -12,10 +12,11 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
-  };
 }
+
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
+};
 
 // const test = new Book("bob", "al jaque", "22", true);
 // myLibrary.push(test)
