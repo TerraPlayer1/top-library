@@ -4,6 +4,7 @@ const modalContent = document.getElementsByClassName("modal-content");
 const span = document.getElementsByClassName("close")[0];
 const cardSpace = document.getElementsByClassName("card-space")[0];
 
+
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -48,11 +49,12 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
 
   const status = document.createElement("p");
 
-  const changeStatus = document.createElement("button");
-  changeStatus.textContent = "R"
+  const statusButton = document.createElement("button");
+  statusButton.textContent = "R"
 
   const remove = document.createElement("button");
   remove.textContent = "Del"
+
 
   cardSpace.appendChild(card)
   card.appendChild(title);
@@ -60,13 +62,27 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
   card.appendChild(info);
   info.appendChild(pages);
   info.appendChild(status);
-  info.appendChild(changeStatus);
+  info.appendChild(statusButton);
   card.appendChild(remove);
   title.textContent = myLibrary[getBook].title
   // alert(myLibrary[book].title)
   author.textContent = myLibrary[getBook].author
   pages.textContent = myLibrary[getBook].pages
   status.textContent = myLibrary[getBook].read
+
+  changeStatus(statusButton, getBook, status);
+}
+
+function changeStatus(button, book, status) {
+  button.onclick = function() {
+    if (myLibrary[book].read === "not read") {
+      myLibrary[book].read = "read";
+      status.textContent = myLibrary[book].read;
+    } else {
+       myLibrary[book].read = "not read"; 
+       status.textContent = myLibrary[book].read;
+    }
+   }
 }
 
 const br = document.createElement("br");
