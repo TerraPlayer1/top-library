@@ -71,6 +71,7 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
   status.textContent = myLibrary[getBook].read
 
   changeStatus(statusButton, getBook, status);
+  removeBook(remove, title, card)
 }
 
 function changeStatus(button, book, status) {
@@ -83,6 +84,14 @@ function changeStatus(button, book, status) {
        status.textContent = myLibrary[book].read;
     }
    }
+}
+
+function removeBook(button, bookTitle, card) {
+  button.onclick = function() {
+    myLibrary.splice(0, 1);
+    card.remove();
+    console.log(myLibrary)
+ }
 }
 
 const br = document.createElement("br");
@@ -184,6 +193,3 @@ function createForm() {
     modal.style.display = "none";
   });
 }
-
-
-// TODO: Add functionaliy to status and delete buttons
