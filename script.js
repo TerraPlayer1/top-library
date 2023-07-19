@@ -34,20 +34,22 @@ addBookBtn.onclick = function () {
 
 function createCard() { // No need to reiterate/ just look at -1 in the array
   const getBook = myLibrary.length - 1
-  // alert(cardClass.h2)// Alert h2 of all cards
+  // alert(cardClass.h3)// Alert h3 of all cards
   const card = document.createElement("div");
   card.setAttribute("class", "card");
 
-  const title = document.createElement("h2");
+  const title = document.createElement("h3");
 
-  const author = document.createElement("h3");
-
-  const info = document.createElement("div");
-  info.setAttribute("class", "page-status-container")
+  const author = document.createElement("h4");
 
   const pages = document.createElement("p");
 
-  const status = document.createElement("p");
+  const info = document.createElement("div");
+  info.setAttribute("class", "card-options-container")
+
+  
+
+  // const status = document.createElement("p");
 
   const statusButton = document.createElement("button");
   statusButton.textContent = "R"
@@ -59,29 +61,29 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
   cardSpace.appendChild(card)
   card.appendChild(title);
   card.appendChild(author);
+  card.appendChild(pages);
   card.appendChild(info);
-  info.appendChild(pages);
-  info.appendChild(status);
+  // info.appendChild(status);
   info.appendChild(statusButton);
-  card.appendChild(remove);
+  info.appendChild(remove);
   title.textContent = myLibrary[getBook].title
   // alert(myLibrary[book].title)
   author.textContent = myLibrary[getBook].author
   pages.textContent = myLibrary[getBook].pages
-  status.textContent = myLibrary[getBook].read
+  statusButton.textContent = myLibrary[getBook].read
 
-  changeStatus(statusButton, getBook, status);
+  changeStatus(statusButton, getBook);
   removeBook(remove, title, card)
 }
 
-function changeStatus(button, book, status) {
+function changeStatus(button, book) {
   button.onclick = function() {
     if (myLibrary[book].read === "not read") {
       myLibrary[book].read = "read";
-      status.textContent = myLibrary[book].read;
+      button.textContent = myLibrary[book].read;
     } else {
        myLibrary[book].read = "not read"; 
-       status.textContent = myLibrary[book].read;
+       button.textContent = myLibrary[book].read;
     }
    }
 }
