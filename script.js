@@ -52,12 +52,13 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
   // const status = document.createElement("p");
 
   const statusButton = document.createElement("button");
-  statusButton.textContent = "R"
+  statusButton.setAttribute("class", "status")
 
   const remove = document.createElement("button");
   remove.textContent = "Del"
-
-
+  remove.setAttribute("class", "remove")
+  // TODO: When removing older book from library existing book status cannot be changed. Adding a new book fixes this visually.
+  // value of book/getBook does not change appropriately when removing earlier element
   cardSpace.appendChild(card)
   card.appendChild(title);
   card.appendChild(author);
@@ -69,7 +70,7 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
   title.textContent = myLibrary[getBook].title
   // alert(myLibrary[book].title)
   author.textContent = myLibrary[getBook].author
-  pages.textContent = myLibrary[getBook].pages
+  pages.textContent = myLibrary[getBook].pages + " pages"
   statusButton.textContent = myLibrary[getBook].read
 
   changeStatus(statusButton, getBook);
@@ -85,6 +86,7 @@ function changeStatus(button, book) {
        myLibrary[book].read = "not read"; 
        button.textContent = myLibrary[book].read;
     }
+    console.log(myLibrary, book)
    }
 }
 

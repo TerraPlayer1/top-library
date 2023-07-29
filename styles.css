@@ -40,8 +40,42 @@ header {
 
 .card-options-container {
   display: flex;
-  align-items: center;
+  align-content: stretch;
   justify-content: space-between;
+  height: 42px;
+  align-self: end;
+}
+
+.status {
+  flex-grow: 2;
+}
+
+.status,
+.remove {
+ border-style: none;
+ background-color: #bf915881;
+ font-size: larger;
+ font-weight: lighter;
+ border-radius: 2px;
+ transition-duration: 0.1s;
+}
+
+.status:hover,
+.remove:hover {
+  background-color: #bf9158af;
+}
+
+.status:active,
+.remove:active {
+  font-size: 100%;
+  background-color: #bf9158c4;
+}
+
+.remove {
+  font-size: medium;
+  border-left: #8d503f;
+  border-left-style: solid;
+  border-left-width: 2px;
 }
 
 .add-book {
