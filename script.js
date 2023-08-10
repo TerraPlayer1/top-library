@@ -18,11 +18,6 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
 };
 
-// const test = new Book("bob", "al jaque", "22", true);
-// myLibrary.push(test)
-
-// const test2 = new Book("Big", "Son Bonbbon", "2000", false);
-// myLibrary.push(test2)
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -32,9 +27,8 @@ addBookBtn.onclick = function () {
   createForm();
 };
 
-function createCard() { // No need to reiterate/ just look at -1 in the array
+function createCard() {
   const getBook = myLibrary.length - 1
-  // alert(cardClass.h3)// Alert h3 of all cards
   const card = document.createElement("div");
   card.setAttribute("class", "card");
 
@@ -49,53 +43,52 @@ function createCard() { // No need to reiterate/ just look at -1 in the array
 
   
 
-  // const status = document.createElement("p");
-
   const statusButton = document.createElement("button");
   statusButton.setAttribute("class", "status")
 
   const remove = document.createElement("button");
   remove.textContent = "Del"
   remove.setAttribute("class", "remove")
-  // TODO: When removing older book from library existing book status cannot be changed. Adding a new book fixes this visually.
-  // value of book/getBook does not change appropriately when removing earlier element
   cardSpace.appendChild(card)
   card.appendChild(title);
   card.appendChild(author);
   card.appendChild(pages);
   card.appendChild(info);
-  // info.appendChild(status);
   info.appendChild(statusButton);
   info.appendChild(remove);
+
   title.textContent = myLibrary[getBook].title
-  // alert(myLibrary[book].title)
   author.textContent = myLibrary[getBook].author
   pages.textContent = myLibrary[getBook].pages + " pages"
   statusButton.textContent = myLibrary[getBook].read
 
-  changeStatus(statusButton, getBook);
+  
+  changeStatus(statusButton, card);
   removeBook(remove, title, card)
 }
 
-function changeStatus(button, book) {
+function changeStatus(button, card) {
   button.onclick = function() {
-    if (myLibrary[book].read === "not read") {
-      myLibrary[book].read = "read";
-      button.textContent = myLibrary[book].read;
+    if (myLibrary[findIndex(card)].read === "not read") {
+      myLibrary[findIndex(card)].read = "read";
+      button.textContent = myLibrary[findIndex(card)].read;
     } else {
-       myLibrary[book].read = "not read"; 
-       button.textContent = myLibrary[book].read;
+      myLibrary[findIndex(card)].read = "not read"; 
+       button.textContent = myLibrary[findIndex(card)].read;
     }
-    console.log(myLibrary, book)
    }
 }
 
-function removeBook(button, bookTitle, card) {
+function removeBook(button, card) {
   button.onclick = function() {
-    myLibrary.splice(0, 1);
+    myLibrary.splice(findIndex(card), 1);
     card.remove();
-    console.log(myLibrary)
  }
+}
+
+function findIndex(card) {// Finds the index of the card you're currently manipulating
+  const elementPos = myLibrary.map(e => e.title).indexOf(card.firstChild.textContent);
+  return elementPos
 }
 
 const br = document.createElement("br");
@@ -104,7 +97,7 @@ function createForm() {
 
   const form = document.createElement("form");
   form.setAttribute("class", "bookForm");
-  form.setAttribute("method", "post");
+  form.setAttribute("method", "elementPost");
   form.setAttribute("action", "submit.php");
 
   const title = document.createElement("input");
